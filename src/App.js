@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Home';
-import UserProfile from './components/UserProfile';
-import Login from './components/Login';
-import AddCredit from './component/AddCredit';
-import AddDebit from './component/AddDebit';
+import Home from './component/Home';
+import UserProfile from './component/UserProfile';
+import Login from './component/Login';
+import Credits from './component/AddCredit';
+import Debits from './component/AddDebit';
 import axios from "axios";
 
 class App extends Component {
@@ -22,6 +22,11 @@ class App extends Component {
       },
     }
   }
+
+ componentDidMount = () => {
+    this.getCredits();
+    this.getDebits();
+  };
 
 mockLogin = (loginInfo) => {
     const newUser = {...this.state.currentUser}
