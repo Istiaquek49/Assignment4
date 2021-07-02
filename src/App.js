@@ -23,11 +23,6 @@ class App extends Component {
     }
   }
 
- componentDidMount = () => {
-    this.getCredits();
-    this.getDebits();
-  };
-
 mockLogin = (loginInfo) => {
     const newUser = {...this.state.currentUser}
     newUser.userName = loginInfo.username
@@ -37,7 +32,8 @@ mockLogin = (loginInfo) => {
     this.calculateCredits();
     this.calculateDebits();
     this.calculateAccountBalance();
-  };
+};
+  
 calculateDebits = () => {
     let total =0
     for(let i of this.state.debits) {
@@ -68,7 +64,13 @@ calculateAccountBalance = () => {
     this.setState({
       accountBalance: creditsTotal - debitsTotal
     })
-  };
+};
+  
+componentDidMount = () => {
+  this.getCredits();
+  this.getDebits();
+};
+  
 handleAddCredit = (item, amount) => {
     let currBalance = this.state.accountBalance
     let newCredits = this.state.credits.concat([{
@@ -82,7 +84,8 @@ handleAddCredit = (item, amount) => {
       creditsTotal: newTotal,
       accountBalance: currBalance + newTotal
     })
-  };
+};
+  
 handleAddDebit = (item, amount) => {
     let currBalance = this.state.accountBalance
     let newDebits = this.state.debits.concat([{
@@ -96,7 +99,8 @@ handleAddDebit = (item, amount) => {
       debitsTotal: newTotal,
       accountBalance: currBalance - newTotal
     }) 
-  };
+};
+  
 async getCredits() {
     await axios.get("https://moj-api.herokuapp.com/credits")
     .then(response => {
@@ -107,6 +111,7 @@ async getCredits() {
     })
     .catch(err => console.log(err))
   };
+
 async getDebits() {
     await axios.get("https://moj-api.herokuapp.com/debits")
     .then(response => {
