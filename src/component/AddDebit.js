@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Stat from "./Description";
 
 class Debits extends Component {
     constructor(props) {
@@ -25,7 +26,11 @@ class Debits extends Component {
         this.props.handleAddDebit(this.state.item, this.state.amount);
     };
 
-render() {
+    render() {
+        let debits = []
+        for(let i of this.props.debits) {
+            debits.push(<Stat description={i.description} amount={i.amount} date={i.date}/>);
+        }
     return(
         <div>
             <Link to="/home">Home</Link>

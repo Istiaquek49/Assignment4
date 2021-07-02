@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-
+import Stat from "./Description";
 
 class Credits extends Component {
     constructor(props) {
@@ -24,7 +24,11 @@ handleSubmit = (event) => {
         event.preventDefault();
         this.props.handleAddCredit(this.state.item, this.state.amount);
     };
-render() {
+    render() {
+        let credits = []
+        for(let i of this.props.credits) {
+            credits.push(<Stat description={i.description} amount={i.amount} date={i.date}/>);
+        }
     return (
         <div>
             <Link to="/home">Home</Link>
